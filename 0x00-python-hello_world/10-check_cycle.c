@@ -24,8 +24,9 @@ int check_cycle(listint_t *list)
 	{
 		if (tort == haire)
 			return (1);
-	tort = list->next;
-	haire = list->next->next;
+		tort = list->next;
+		haire = list->next->next;
 	}
 	return (0);
 }
+
