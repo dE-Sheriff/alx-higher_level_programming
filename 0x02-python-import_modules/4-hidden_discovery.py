@@ -5,4 +5,3 @@ if "__main__" == __name__:
     for _def in dir(hidden_4):
         if _def[0] != "_":
             print(_def)
-    
