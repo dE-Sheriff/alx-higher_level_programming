@@ -7,4 +7,4 @@ def add_tuple(tuple_a=(), tuple_b=()):
     b2 = tuple_b[1] if len(tuple_b) > 1 and tuple_b[1] is not None else 0
     x = a1+b1
     y = a2+b2
-    return tuple((a1+b1, a2+b2),)
+    return (x, y)
