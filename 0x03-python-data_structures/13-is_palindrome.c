@@ -30,7 +30,7 @@ void reverse_list(listint_t **head)
 int is_palindrome(listint_t **head)
 
 {
-	listint_t *tort, *hare, *hare_head;
+	listint_t *tort, *hare, *new_head;
 
 	if (head == NULL || *head == NULL)
 		return (1);
@@ -43,22 +43,27 @@ int is_palindrome(listint_t **head)
 		tort = tort->next;
 		hare = hare->next->next;
 	}
-	hare_head = malloc(sizeof(listint_t));
+	new_head = malloc(sizeof(listint_t));
+	if (new_head == NULL)
+		return (1);
 
 	if (hare == NULL)
-		hare_head = tort->next;
-	else if (hare->next == NULL)
-		hare_head = tort->next->next;
+		new_head = tort->next;
 
-	reverse_list(&hare_head);
+	else if (hare->next == NULL)
+		new_head = tort->next->next;
+	
+	tort->next = NULL;
+	reverse_list(&new_head);
 	while (tort != NULL)
 	{
 		if ((*head)->n != tort->n)
 		return (0);
-
-		*head = (*head)->next;
-		tort = tort->next;
 	}
-	free(hare_head);
+
+	*head = (*head)->next;
+	tort = tort->next;
+
+	free(new_head);
 	return (1);
 }
