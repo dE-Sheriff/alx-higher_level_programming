@@ -33,7 +33,7 @@ int is_palindrome(listint_t **head)
 	listint_t *tort, *hare, *new_head;
 
 	if (head == NULL && *head == NULL)
-		return (0);
+		return (1);
 
 	tort = *head;
 	hare = *head;
@@ -44,16 +44,19 @@ int is_palindrome(listint_t **head)
 		hare = hare->next->next;
 	}
 	new_head = (hare == NULL) ? tort->next : tort->next->next;
-	
+
+	if (new_head == NULL)
+        return (1);
+
 	tort->next = NULL;
 	reverse_list(&new_head);
 
 	while (tort != NULL)
 	{
 		if ((*head)->n != tort->n)
-		return (1);
+			return (0);
 		*head = (*head)->next;
 		tort = tort->next;
 	}
-	return (0);
+	return (1);
 }
