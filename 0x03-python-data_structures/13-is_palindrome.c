@@ -32,38 +32,28 @@ int is_palindrome(listint_t **head)
 {
 	listint_t *tort, *hare, *new_head;
 
-	if (head == NULL || *head == NULL)
-		return (1);
+	if (head == NULL && *head == NULL)
+		return (0);
 
 	tort = *head;
 	hare = *head;
 
-	while (hare != NULL || hare->next != NULL)
+	while (hare != NULL && hare->next != NULL)
 	{
 		tort = tort->next;
 		hare = hare->next->next;
 	}
-	new_head = malloc(sizeof(listint_t));
-	if (new_head == NULL)
-		return (1);
-
-	if (hare == NULL)
-		new_head = tort->next;
-
-	else if (hare->next == NULL)
-		new_head = tort->next->next;
+	new_head = (hare == NULL) ? tort->next : tort->next->next;
 	
 	tort->next = NULL;
 	reverse_list(&new_head);
+
 	while (tort != NULL)
 	{
 		if ((*head)->n != tort->n)
-		return (0);
+		return (1);
+		*head = (*head)->next;
+		tort = tort->next;
 	}
-
-	*head = (*head)->next;
-	tort = tort->next;
-
-	free(new_head);
-	return (1);
+	return (0);
 }
