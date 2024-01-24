@@ -52,8 +52,6 @@ int is_palindrome(listint_t **head)
 
 	tort->next = NULL;
 	reverse_list(&new_head);
-	print_listint(new_head);
-	print_listint(*head);
 
 	while (tort != NULL)
 	{
