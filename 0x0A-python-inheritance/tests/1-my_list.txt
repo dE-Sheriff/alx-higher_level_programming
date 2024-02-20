@@ -1,0 +1,89 @@
+Tests for the docs
+==============
+>>> MyList = __import__('1-my_list').MyList
+>>> MyList.__doc__
+'that prints the list, but sorted (ascending sort)'
+
+Other tests
+=============
+>>> my_list = MyList()
+>>> isinstance(my_list, list)
+True
+>>> my_list.print_sorted()
+[]
+
+adding items in the list
+>>> my_list.append(21)
+>>> my_list.append(34)
+>>> my_list.append(349)
+>>> my_list.print_sorted()
+[21, 34, 349]
+
+with infinite integer
+>>> my_list.append(int('inf'))
+Traceback (most recent call last):
+...
+ValueError: invalid literal for int() with base 10: 'inf'
+
+with negative values
+>>> my_list.append(-5)
+>>> my_list.append(0)
+>>> my_list.print_sorted()
+[-5, 0, 21, 34, 349]
+
+with repeated elements
+>>> my_list.append(-5)
+>>> my_list.append(34)
+>>> my_list.print_sorted()
+[-5, -5, 0, 21, 34, 34, 349]
+
+with a large number
+>>> my_list.append(100000000000000000000000000000006666666666666669999999999999)
+>>> my_list.print_sorted()
+[-5, -5, 0, 21, 34, 34, 349, 100000000000000000000000000000006666666666666669999999999999]
+
+when all elementes in the list are the same
+>>> my_list.clear()
+>>> my_list.append(7)
+>>> my_list.append(7)
+>>> my_list.append(7)
+>>> my_list.append(7)
+>>> my_list.print_sorted()
+[7, 7, 7, 7]
+
+with None value
+>>> my_list.append(None)
+>>> my_list.print_sorted()
+Traceback (most recent call last):
+...
+TypeError: '<' not supported between instances of 'NoneType' and 'int'
+
+with unknown constants value, like NULL
+>>> my_list.append(NULL)
+Traceback (most recent call last):
+...
+NameError: name 'NULL' is not defined
+
+with string values
+>>> my_list.clear()
+>>> my_list.append(8)
+>>> my_list.append("String")
+>>> my_list.print_sorted()
+Traceback (most recent call last):
+...
+TypeError: '<' not supported between instances of 'str' and 'int'
+
+with boolean values
+>>> my_list.clear()
+>>> my_list.append(3)
+>>> my_list.append(False)
+>>> my_list.append(True)
+>>> my_list.print_sorted()
+[False, True, 3]
+
+With other data types: e.g. dict
+>>> my_list.append({'key':'value'})
+>>> my_list.print_sorted()
+Traceback (most recent call last):
+...
+TypeError: '<' not supported between instances of 'dict' and 'bool'
